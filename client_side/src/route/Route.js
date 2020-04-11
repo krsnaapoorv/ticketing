@@ -1,6 +1,9 @@
 import React,{useEffect} from 'react'
 import {Switch, Route,Link} from 'react-router-dom'
 import Home from '../components/Home'
+import Theatre from '../components/Theatre'
+import Seat from '../components/Seat'
+import Booking from '../components/Bookings'
 import SignUp from '../auth/Signup'
 import SignIn from '../auth/Signin'
 import {signout,login} from '../redux/Action'
@@ -29,6 +32,11 @@ function Routes(props){
                     <h3 className="navbar-brand text-white" ><Link to="/">Watcher's</Link></h3>
                     <div className=" navbar-collapse" id="navbarNav">
                         <div className="ml-auto text-white">Hello {props.user}!</div>
+                        <ul className="navbar-nav float-left">
+                            <li className="nav-item active ml-3 ">
+                                <Link to="/booking" >My Bookings</Link>
+                            </li>
+                        </ul>
                         {props.isloggedIn ? (
                             <div className="ml-auto">
                                 <button className = "btn btn-info m-2" onClick={handleclick}>Sign off</button>
@@ -42,6 +50,9 @@ function Routes(props){
                 </nav>
                 <Switch>
                     <Route path="/" exact component = {Home} />
+                    <Route path="/theatre/:id" component = {(props) => <Theatre {...props} />} />
+                    <Route path="/screen/:id" component = {(props) => <Seat {...props} />} />
+                    <Route path="/booking" exact component = {Booking} />
                     <Route path="/signin" exact component = {SignIn} />
                     <Route path="/signup" exact component = {SignUp} />
                 </Switch>
